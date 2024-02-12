@@ -18,6 +18,11 @@ public class Field {
             this.data[coordinates.x][coordinates.y] = tile;
         }
     }
+    public void deleteObstacle(GridPoint2 coordinates) {
+        if (coordinates.x < data.length && coordinates.y < data[coordinates.x].length) {
+            this.data[coordinates.x][coordinates.y] = new Tile();
+        }
+    }
     public boolean checkIfObstacle(GridPoint2 coordinates) {
         if (coordinates.x >=0 && coordinates.x < data.length && coordinates.y >= 0 && coordinates.y < data[coordinates.x].length) {
             return this.data[coordinates.x][coordinates.y].isObstacle();

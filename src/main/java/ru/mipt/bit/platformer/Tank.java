@@ -19,12 +19,14 @@ public class Tank extends Tile{
         tileMovement = new TileMovement(tileLayer, Interpolation.smooth);
     }
 
-    public void render(float deltaTime) {
+    public void render(float deltaTime, Field field) {
         tileMovement.moveRectangleBetweenTileCenters(this.tileRectangle, this.tileCoordinates, this.tankDestinationCoordinates, this.tankMovementProgress);
         this.tankMovementProgress = continueProgress(this.tankMovementProgress, deltaTime, MOVEMENT_SPEED);
         if (isEqual(this.tankMovementProgress, 1f)) {
             // record that the tank has reached his destination
+            field.deleteObstacle(this.tileCoordinates);
             this.tileCoordinates.set(this.tankDestinationCoordinates);
+            field.setTile(this.tileCoordinates, this);
         }
     }
 

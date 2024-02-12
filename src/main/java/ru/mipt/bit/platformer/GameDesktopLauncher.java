@@ -21,6 +21,7 @@ public class GameDesktopLauncher implements ApplicationListener {
     private Batch batch;
 
     private Tank playerTank;
+    private Player player;
     private Tile greenTree;
     private Field field;
 
@@ -40,6 +41,8 @@ public class GameDesktopLauncher implements ApplicationListener {
 
         playerTank = new Tank(field, groundLayer, "images/tank_blue.png",  new GridPoint2(1, 1));
 
+        player = new Player(playerTank);
+
         greenTree = new Tile(field, groundLayer, "images/greenTree.png", new GridPoint2(1, 3), true);
     }
 
@@ -52,20 +55,9 @@ public class GameDesktopLauncher implements ApplicationListener {
         // get time passed since the last render
         float deltaTime = Gdx.graphics.getDeltaTime();
 
-        if (Gdx.input.isKeyPressed(UP) || Gdx.input.isKeyPressed(W)) {
-            playerTank.moveTo(Direction.UP, field);
-        }
-        if (Gdx.input.isKeyPressed(LEFT) || Gdx.input.isKeyPressed(A)) {
-            playerTank.moveTo(Direction.LEFT, field);
-        }
-        if (Gdx.input.isKeyPressed(DOWN) || Gdx.input.isKeyPressed(S)) {
-            playerTank.moveTo(Direction.DOWN, field);
-        }
-        if (Gdx.input.isKeyPressed(RIGHT) || Gdx.input.isKeyPressed(D)) {
-            playerTank.moveTo(Direction.RIGHT, field);
-        }
+        player.scanForKeys(field);
 
-        playerTank.render(deltaTime);
+        player.renderPlayerTank(deltaTime, field);
 
         // render each tile of the level
         levelRenderer.render();
