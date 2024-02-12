@@ -3,19 +3,24 @@ package ru.mipt.bit.platformer;
 import com.badlogic.gdx.math.GridPoint2;
 
 public class Field {
-    private Tile[][] data;
+    private Object[][] data;
 
-    public Field(Tile[][] data) {
+    public Field(Object[][] data) {
         this.data = data;
         for(int i = 0; i < data.length; ++i) {
             for (int j = 0; j < data[i].length; ++j) {
-                data[i][j] = new Tile();
+                data[i][j] = new Object();
             }
         }
     }
-    public void setTile(GridPoint2 coordinates, Tile tile) {
+    public void setTile(GridPoint2 coordinates, Object object) {
         if (coordinates.x < data.length && coordinates.y < data[coordinates.x].length) {
-            this.data[coordinates.x][coordinates.y] = tile;
+            this.data[coordinates.x][coordinates.y] = object;
+        }
+    }
+    public void deleteObstacle(GridPoint2 coordinates) {
+        if (coordinates.x < data.length && coordinates.y < data[coordinates.x].length) {
+            this.data[coordinates.x][coordinates.y] = new Object();
         }
     }
     public boolean checkIfObstacle(GridPoint2 coordinates) {

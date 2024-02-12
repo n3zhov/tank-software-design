@@ -21,8 +21,10 @@ public class GameDesktopLauncher implements ApplicationListener {
     private Batch batch;
 
     private Tank playerTank;
-    private Tile greenTree;
+    private Object greenTree;
     private Field field;
+
+    private Player player;
 
     private TiledMap level;
     private MapRenderer levelRenderer;
@@ -30,7 +32,7 @@ public class GameDesktopLauncher implements ApplicationListener {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        field = new Field(new Tile[10][8]);
+        field = new Field(new Object[10][8]);
 
         // load level tiles
         level = new TmxMapLoader().load("level.tmx");
@@ -40,7 +42,9 @@ public class GameDesktopLauncher implements ApplicationListener {
 
         playerTank = new Tank(field, groundLayer, "images/tank_blue.png",  new GridPoint2(1, 1));
 
-        greenTree = new Tile(field, groundLayer, "images/greenTree.png", new GridPoint2(1, 3), true);
+        player = new Player(playerTank);
+
+        greenTree = new Object(field, groundLayer, "images/greenTree.png", new GridPoint2(1, 3), true);
     }
 
     @Override
@@ -52,20 +56,9 @@ public class GameDesktopLauncher implements ApplicationListener {
         // get time passed since the last render
         float deltaTime = Gdx.graphics.getDeltaTime();
 
-        if (Gdx.input.isKeyPressed(UP) || Gdx.input.isKeyPressed(W)) {
-            playerTank.moveTo(Direction.UP, field);
-        }
-        if (Gdx.input.isKeyPressed(LEFT) || Gdx.input.isKeyPressed(A)) {
-            playerTank.moveTo(Direction.LEFT, field);
-        }
-        if (Gdx.input.isKeyPressed(DOWN) || Gdx.input.isKeyPressed(S)) {
-            playerTank.moveTo(Direction.DOWN, field);
-        }
-        if (Gdx.input.isKeyPressed(RIGHT) || Gdx.input.isKeyPressed(D)) {
-            playerTank.moveTo(Direction.RIGHT, field);
-        }
+        player.scanForKeys(field);
 
-        playerTank.render(deltaTime);
+        player.renderPlayerTank(deltaTime, field);
 
         // render each tile of the level
         levelRenderer.render();
