@@ -18,4 +18,16 @@ public class MoovableObject extends Object{
         tileMovement = new TileMovement(tileLayer, Interpolation.smooth);
         this.tileDestinationCoordinates = new GridPoint2(coordinates);
     }
+
+    public void setTileMovement(TileMovement tileMovement) {
+        this.tileMovement = tileMovement;
+    }
+
+    public void setTileDestinationCoordinates(GridPoint2 tileDestinationCoordinates) {
+        this.tileDestinationCoordinates = tileDestinationCoordinates;
+    }
+
+    public void setObjectMovementProgress(float objectMovementProgress) {
+        this.objectMovementProgress = objectMovementProgress;
+    }
 }

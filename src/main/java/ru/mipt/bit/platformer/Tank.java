@@ -45,11 +45,7 @@ public class Tank extends MoovableObject implements MoovableObjectInterface{
                 default:
                     break;
             }
-            if (Boolean.FALSE.equals(field.checkIfObstacle(destination))) {
-                this.objectMovementProgress = 0f;
-                this.tileRotation = updatedTankRotation;
-                this.tileDestinationCoordinates.set(destination);
-            }
+            CollisionDetector.startMovement(this, destination, field, updatedTankRotation);
         }
     }
 }

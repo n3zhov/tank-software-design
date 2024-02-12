@@ -33,4 +33,8 @@ public class Tile {
     public void drawInBatch(Batch batch) {
         drawTextureRegionUnscaled(batch, tileRegion, tileRectangle, tileRotation);
     }
+
+    public void setTileRotation(float tileRotation) {
+        this.tileRotation = tileRotation;
+    }
 }

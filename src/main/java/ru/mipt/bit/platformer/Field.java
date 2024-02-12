@@ -3,7 +3,7 @@ package ru.mipt.bit.platformer;
 import com.badlogic.gdx.math.GridPoint2;
 
 public class Field {
-    private Object[][] data;
+    protected Object[][] data;
 
     public Field(Object[][] data) {
         this.data = data;
