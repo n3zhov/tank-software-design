@@ -13,7 +13,7 @@ public class Field {
             }
         }
     }
-    public void setTile(GridPoint2 coordinates, Object object) {
+    public void setObject(GridPoint2 coordinates, Object object) {
         if (coordinates.x < data.length && coordinates.y < data[coordinates.x].length) {
             this.data[coordinates.x][coordinates.y] = object;
         }

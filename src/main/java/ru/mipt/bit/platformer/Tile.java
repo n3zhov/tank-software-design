@@ -19,11 +19,21 @@ public class Tile {
 
         moveRectangleAtTileCenter(tileLayer, tileRectangle, tileCoordinates);
     }
-    public Tile() {};
+    public Tile(GridPoint2 coordinates) {this.tileCoordinates = coordinates;};
     protected Texture texture;
     protected TextureRegion tileRegion;
-    protected GridPoint2 tileCoordinates;
+    public GridPoint2 tileCoordinates;
+
+    public void setTileRectangle(Rectangle tileRectangle) {
+        this.tileRectangle = tileRectangle;
+    }
+
     protected Rectangle tileRectangle;
+
+    public float getTileRotation() {
+        return tileRotation;
+    }
+
     protected float tileRotation;
 
     public void dispose() {
@@ -36,5 +46,17 @@ public class Tile {
 
     public void setTileRotation(float tileRotation) {
         this.tileRotation = tileRotation;
+    }
+
+    public void setTileCoordinates(GridPoint2 tileCoordinates) {
+        this.tileCoordinates = tileCoordinates;
+    }
+
+    public GridPoint2 getTileCoordinates() {
+        return tileCoordinates;
+    }
+
+    public Rectangle getTileRectangle() {
+        return tileRectangle;
     }
 }

@@ -3,15 +3,16 @@ package ru.mipt.bit.platformer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 
-import static ru.mipt.bit.platformer.util.GdxGameUtils.*;
-
-public class Object extends Tile {
+public class Object {
+    private Tile tile;
+    GridPoint2 coordinates;
     protected boolean obstacle;
-    public Object(Field field, TiledMapTileLayer tileLayer, String pathToTexture, GridPoint2 coordinates, boolean obstacle) {
-        super(tileLayer, pathToTexture, coordinates);
+    public Object(Field field, Tile tile, boolean obstacle) {
+        this.tile = tile;
         this.obstacle = obstacle;
+        this.coordinates = tile.getTileCoordinates();
 
-        field.setTile(this.tileCoordinates, this);
+        field.setObject(this.tile.getTileCoordinates(), this);
     }
 
     public Object() {
@@ -25,5 +26,9 @@ public class Object extends Tile {
 
     public void setObstacle(boolean obstacle) {
         this.obstacle = obstacle;
+    }
+
+    public Tile getTile() {
+        return tile;
     }
 }

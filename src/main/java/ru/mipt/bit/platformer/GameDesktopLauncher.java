@@ -20,7 +20,9 @@ public class GameDesktopLauncher implements ApplicationListener {
 
     private Batch batch;
 
+    private MoovableTile playerTankTile;
     private Tank playerTank;
+    private Tile greenTreeTile;
     private Object greenTree;
     private Field field;
 
@@ -39,12 +41,15 @@ public class GameDesktopLauncher implements ApplicationListener {
         levelRenderer = createSingleLayerMapRenderer(level, batch);
         TiledMapTileLayer groundLayer = getSingleLayer(level);
 
+        playerTankTile = new MoovableTile(groundLayer, "images/tank_blue.png",  new GridPoint2(1, 1));
 
-        playerTank = new Tank(field, groundLayer, "images/tank_blue.png",  new GridPoint2(1, 1));
+        playerTank = new Tank(field, playerTankTile);
 
         player = new Player(playerTank);
 
-        greenTree = new Object(field, groundLayer, "images/greenTree.png", new GridPoint2(1, 3), true);
+        greenTreeTile = new Tile(groundLayer, "images/greenTree.png", new GridPoint2(1, 3));
+
+        greenTree = new Object(field, greenTreeTile, true);
     }
 
     @Override
@@ -67,10 +72,10 @@ public class GameDesktopLauncher implements ApplicationListener {
         batch.begin();
 
         // render player
-        playerTank.drawInBatch(batch);
+        playerTank.getMoovableTile().drawInBatch(batch);
 
         // render tree obstacle
-        greenTree.drawInBatch(batch);
+        greenTree.getTile().drawInBatch(batch);
 
 
         // submit all drawing requests
@@ -95,8 +100,8 @@ public class GameDesktopLauncher implements ApplicationListener {
     @Override
     public void dispose() {
         // dispose of all the native resources (classes which implement com.badlogic.gdx.utils.Disposable)
-        greenTree.dispose();
-        playerTank.dispose();
+        greenTree.getTile().dispose();
+        playerTank.getMoovableTile().dispose();
         level.dispose();
         batch.dispose();
     }

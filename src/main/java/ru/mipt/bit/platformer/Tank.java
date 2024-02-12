@@ -7,24 +7,25 @@ import static com.badlogic.gdx.math.MathUtils.isEqual;
 import static ru.mipt.bit.platformer.util.GdxGameUtils.continueProgress;
 
 public class Tank extends MoovableObject implements MoovableObjectInterface{
-    public Tank(Field field, TiledMapTileLayer tileLayer, String pathToTexture, GridPoint2 coordinates) {
-        super(field, tileLayer, pathToTexture, coordinates, true);
+    public Tank(Field field, MoovableTile moovableTile) {
+        super(field, moovableTile, true);
     }
 
     public void render(float deltaTime, Field field) {
-        tileMovement.moveRectangleBetweenTileCenters(this.tileRectangle, this.tileCoordinates, this.tileDestinationCoordinates, this.objectMovementProgress);
-        this.objectMovementProgress = continueProgress(this.objectMovementProgress, deltaTime, MOVEMENT_SPEED);
-        if (isEqual(this.objectMovementProgress, 1f)) {
+        this.moovableTile.render(deltaTime, field);
+        field.setObject(this.moovableTile.getTileCoordinates(), this);
+
+        if (isEqual(this.moovableTile.getObjectMovementProgress(), 1f)) {
             // record that the tank has reached his destination
-            field.deleteObstacle(this.tileCoordinates);
-            this.tileCoordinates.set(this.tileDestinationCoordinates);
-            field.setTile(this.tileCoordinates, this);
+            field.deleteObstacle(this.moovableTile.tileCoordinates);
+            this.moovableTile.setTileCoordinates(this.moovableTile.getTileDestinationCoordinates());
+            field.setObject(this.moovableTile.getTileCoordinates(), this);
         }
     }
 
     public void moveTo(Direction direction, Field field) {
-        if (isEqual(objectMovementProgress, 1f)) {
-            GridPoint2 destination = new GridPoint2(this.tileCoordinates);
+        if (isEqual(this.moovableTile.getObjectMovementProgress(), 1f)) {
+            GridPoint2 destination = new GridPoint2(this.moovableTile.getTileCoordinates());
             float updatedTankRotation = 0f;
             switch (direction) {
                 case RIGHT:
