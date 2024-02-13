@@ -3,11 +3,10 @@ package ru.mipt.bit.platformer;
 import com.badlogic.gdx.math.GridPoint2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.mipt.bit.platformer.object.*;
+import ru.mipt.bit.platformer.object.Object;
 import ru.mipt.bit.platformer.player.Tank;
 import ru.mipt.bit.platformer.level.Field;
-import ru.mipt.bit.platformer.object.Direction;
-import ru.mipt.bit.platformer.object.MoovableTile;
-import ru.mipt.bit.platformer.object.Object;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,11 +30,16 @@ class TankTest {
 
     @Test
     void moveTo() {
-        playerTank.moveTo(Direction.UP, field);
+        Command command = new Command();
+        command.setAction(Action.MoveAction);
+
+        command.setDirection(Direction.UP);
+        playerTank.execute(command, field);
         assertEquals(playerTank.getMoovableTile().getTileDestinationCoordinates(), new GridPoint2(1, 1));
         assertEquals(playerTank.getMoovableTile().getTileRotation(), 0f);
 
-        playerTank.moveTo(Direction.LEFT, field);
+        command.setDirection(Direction.LEFT);
+        playerTank.execute(command, field);
         assertEquals(playerTank.getMoovableTile().getTileDestinationCoordinates(), new GridPoint2(0, 1));
         assertEquals(playerTank.getMoovableTile().getTileRotation(), -180f);
     }

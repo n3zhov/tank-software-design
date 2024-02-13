@@ -10,6 +10,11 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.GridPoint2;
+import ru.mipt.bit.platformer.level.TankGenerator;
+import ru.mipt.bit.platformer.object.EnemyTank;
+import ru.mipt.bit.platformer.object.MoovableObject;
+import ru.mipt.bit.platformer.object.MoovableTile;
 import ru.mipt.bit.platformer.player.Player;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.level.FieldRenderer;
@@ -30,6 +35,8 @@ public class GameDesktopLauncher implements ApplicationListener {
     private TiledMap level;
     private MapRenderer levelRenderer;
 
+    private TankGenerator tankGenerator;
+
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -46,6 +53,9 @@ public class GameDesktopLauncher implements ApplicationListener {
         TextLevelGenerator textLevelGenerator = new TextLevelGenerator(groundLayer, field, "C:\\Users\\nikit\\IdeaProjects\\tank-software\\src\\main\\resources\\level.txt");
         textLevelGenerator.generate();
 
+        tankGenerator = new TankGenerator(groundLayer, field, 2);
+        tankGenerator.generate();
+
         player = field.getPlayer();
     }
 
@@ -58,9 +68,9 @@ public class GameDesktopLauncher implements ApplicationListener {
         // get time passed since the last render
         float deltaTime = Gdx.graphics.getDeltaTime();
 
-        player.scanForKeys(field);
+        field.iterateTanks();
 
-        player.renderPlayerTank(deltaTime, field);
+        field.render(deltaTime);
 
         // render each tile of the level
         levelRenderer.render();

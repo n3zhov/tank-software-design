@@ -9,6 +9,7 @@ import static com.badlogic.gdx.math.MathUtils.isEqual;
 public class Tank extends MoovableObject implements MoovableObjectInterface {
     public Tank(Field field, MoovableTile moovableTile) {
         super(field, moovableTile, true);
+        field.getTanks().add(this);
     }
 
     public void render(float deltaTime, Field field) {
@@ -17,10 +18,26 @@ public class Tank extends MoovableObject implements MoovableObjectInterface {
 
         if (isEqual(this.moovableTile.getObjectMovementProgress(), 1f)) {
             // record that the tank has reached his destination
-            field.deleteObstacle(this.moovableTile.tileCoordinates);
-            this.moovableTile.setTileCoordinates(this.moovableTile.getTileDestinationCoordinates());
-            field.setObject(this.moovableTile.getTileCoordinates(), this);
+            if (!this.moovableTile.tileCoordinates.equals(this.moovableTile.getTileDestinationCoordinates())) {
+                field.deleteObstacle(this.moovableTile.tileCoordinates);
+                this.moovableTile.setTileCoordinates(this.moovableTile.getTileDestinationCoordinates());
+                field.setObject(this.moovableTile.getTileDestinationCoordinates(), this);
+            }
         }
+    }
+
+    public void execute(Command command, Field field) {
+        switch (command.getAction()){
+            case MoveAction:
+                this.moveTo(command.getDirection(), field);
+                break;
+            case ShootAction:
+                break;
+        }
+    }
+
+    private void shoot(Field field) {
+        return;
     }
 
     public void moveTo(Direction direction, Field field) {

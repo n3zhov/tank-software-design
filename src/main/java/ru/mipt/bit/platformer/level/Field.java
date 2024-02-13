@@ -1,14 +1,23 @@
 package ru.mipt.bit.platformer.level;
 
 import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import ru.mipt.bit.platformer.object.MoovableTile;
 import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.object.EnemyTank;
 import ru.mipt.bit.platformer.player.Player;
 import ru.mipt.bit.platformer.player.Tank;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Field {
     private MoovableTile playerTankTile;
+
+    public List<Tank> getTanks() {
+        return tanks;
+    }
+
+    private List<Tank> tanks;
 
     private Player player;
 
@@ -21,6 +30,7 @@ public class Field {
 
     public Field(Object[][] data) {
         this.data = data;
+        this.tanks = new ArrayList<Tank>();
         for(int i = 0; i < data.length; ++i) {
             for (int j = 0; j < data[i].length; ++j) {
                 data[i][j] = new Object();
@@ -28,11 +38,11 @@ public class Field {
         }
     }
 
-    public void render(Batch batch) {
+    public void render(float deltaTime) {
         for(int i = 0; i < data.length; ++i) {
             for (int j = 0; j < data[i].length; ++j) {
-                if(Boolean.TRUE.equals(this.checkIfObstacle(new GridPoint2(i, j)))) {
-                    data[i][j].getTile().drawInBatch(batch);
+                if(Boolean.TRUE.equals(this.checkIfObstacle(new GridPoint2(i, j))) && data[i][j] instanceof Tank) {
+                    ((Tank) data[i][j]).render(deltaTime, this);
                 }
             }
         }
@@ -53,6 +63,16 @@ public class Field {
             return this.data[coordinates.x][coordinates.y].isObstacle();
         } else {
             return true;
+        }
+    }
+
+    public void iterateTanks() {
+        for(Tank tank: tanks) {
+            if (tank instanceof EnemyTank) {
+                ((EnemyTank) tank).iterate(this);
+            } else {
+                player.scanForKeys(this);
+            }
         }
     }
 

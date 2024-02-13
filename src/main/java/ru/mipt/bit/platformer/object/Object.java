@@ -11,7 +11,6 @@ public class Object {
         this.tile = tile;
         this.obstacle = obstacle;
         this.coordinates = tile.getTileCoordinates();
-
         field.setObject(this.tile.getTileCoordinates(), this);
     }
 

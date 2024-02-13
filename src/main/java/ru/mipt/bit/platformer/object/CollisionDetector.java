@@ -9,6 +9,7 @@ public class CollisionDetector{
             object.moovableTile.setObjectMovementProgress(0f);
             object.moovableTile.setTileRotation(updatedTankRotation);
             object.moovableTile.setTileDestinationCoordinates(destinationCoordinates);
+            field.setObject(destinationCoordinates, object);
         }
     }
 }
