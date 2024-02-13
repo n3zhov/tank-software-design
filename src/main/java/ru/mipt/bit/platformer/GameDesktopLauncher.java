@@ -10,21 +10,15 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.GridPoint2;
 
-import static com.badlogic.gdx.Input.Keys.*;
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 import static ru.mipt.bit.platformer.util.GdxGameUtils.*;
 
 public class GameDesktopLauncher implements ApplicationListener {
 
     private Batch batch;
-
-    private MoovableTile playerTankTile;
-    private Tank playerTank;
-    private Tile greenTreeTile;
-    private Object greenTree;
     private Field field;
+    private FieldRenderer fieldRenderer;
 
     private Player player;
 
@@ -35,21 +29,19 @@ public class GameDesktopLauncher implements ApplicationListener {
     public void create() {
         batch = new SpriteBatch();
         field = new Field(new Object[10][8]);
+        fieldRenderer = new FieldRenderer(field);
 
         // load level tiles
         level = new TmxMapLoader().load("level.tmx");
         levelRenderer = createSingleLayerMapRenderer(level, batch);
         TiledMapTileLayer groundLayer = getSingleLayer(level);
 
-        playerTankTile = new MoovableTile(groundLayer, "images/tank_blue.png",  new GridPoint2(1, 1));
+        //RandomLevelGenerator randomLevelGenerator = new RandomLevelGenerator(groundLayer, field);
+        //file should have field size(10, 8)
+        TextLevelGenerator textLevelGenerator = new TextLevelGenerator(groundLayer, field, "C:\\Users\\nikit\\IdeaProjects\\tank-software\\src\\main\\resources\\level.txt");
+        textLevelGenerator.generate();
 
-        playerTank = new Tank(field, playerTankTile);
-
-        player = new Player(playerTank);
-
-        greenTreeTile = new Tile(groundLayer, "images/greenTree.png", new GridPoint2(1, 3));
-
-        greenTree = new Object(field, greenTreeTile, true);
+        player = field.getPlayer();
     }
 
     @Override
@@ -71,11 +63,8 @@ public class GameDesktopLauncher implements ApplicationListener {
         // start recording all drawing commands
         batch.begin();
 
-        // render player
-        playerTank.getMoovableTile().drawInBatch(batch);
-
-        // render tree obstacle
-        greenTree.getTile().drawInBatch(batch);
+        // render
+        fieldRenderer.draw(batch);
 
 
         // submit all drawing requests
@@ -100,8 +89,7 @@ public class GameDesktopLauncher implements ApplicationListener {
     @Override
     public void dispose() {
         // dispose of all the native resources (classes which implement com.badlogic.gdx.utils.Disposable)
-        greenTree.getTile().dispose();
-        playerTank.getMoovableTile().dispose();
+        fieldRenderer.dispose();
         level.dispose();
         batch.dispose();
     }

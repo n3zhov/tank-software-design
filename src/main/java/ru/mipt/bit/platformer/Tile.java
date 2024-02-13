@@ -19,7 +19,9 @@ public class Tile {
 
         moveRectangleAtTileCenter(tileLayer, tileRectangle, tileCoordinates);
     }
-    public Tile(GridPoint2 coordinates) {this.tileCoordinates = coordinates;};
+    public Tile(GridPoint2 coordinates) {
+        this.tileCoordinates = coordinates;
+    }
     protected Texture texture;
     protected TextureRegion tileRegion;
     public GridPoint2 tileCoordinates;
