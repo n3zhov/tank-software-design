@@ -1,17 +1,13 @@
 package ru.mipt.bit.platformer;
 
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.GridPoint2;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-
-import static ru.mipt.bit.platformer.util.GdxGameUtils.createSingleLayerMapRenderer;
-import static ru.mipt.bit.platformer.util.GdxGameUtils.getSingleLayer;
+import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.object.CollisionDetector;
+import ru.mipt.bit.platformer.object.MoovableTile;
+import ru.mipt.bit.platformer.object.Object;
 
 import static org.junit.jupiter.api.Assertions.*;
 

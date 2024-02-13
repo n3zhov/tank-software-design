@@ -1,9 +1,13 @@
-package ru.mipt.bit.platformer;
+package ru.mipt.bit.platformer.level;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
+import ru.mipt.bit.platformer.player.Player;
+import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.object.MoovableTile;
+import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.object.Tile;
 
-import javax.swing.*;
 import java.util.Random;
 
 public class RandomLevelGenerator implements LevelGenerator {

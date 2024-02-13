@@ -1,7 +1,8 @@
-package ru.mipt.bit.platformer;
+package ru.mipt.bit.platformer.level;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
+import ru.mipt.bit.platformer.object.Object;
 
 public class FieldRenderer {
     private Field field;

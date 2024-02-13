@@ -1,9 +1,6 @@
-package ru.mipt.bit.platformer;
+package ru.mipt.bit.platformer.object;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.GridPoint2;
-import com.badlogic.gdx.math.Interpolation;
-import ru.mipt.bit.platformer.util.TileMovement;
+import ru.mipt.bit.platformer.level.Field;
 
 import static com.badlogic.gdx.math.MathUtils.isEqual;
 

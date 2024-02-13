@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.GridPoint2;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.object.Object;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,7 +1,11 @@
-package ru.mipt.bit.platformer;
+package ru.mipt.bit.platformer.level;
 
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import ru.mipt.bit.platformer.object.MoovableTile;
+import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.player.Player;
+import ru.mipt.bit.platformer.player.Tank;
 
 public class Field {
     private MoovableTile playerTankTile;

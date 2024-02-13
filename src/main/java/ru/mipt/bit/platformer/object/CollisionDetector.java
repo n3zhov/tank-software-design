@@ -1,6 +1,7 @@
-package ru.mipt.bit.platformer;
+package ru.mipt.bit.platformer.object;
 
 import com.badlogic.gdx.math.GridPoint2;
+import ru.mipt.bit.platformer.level.Field;
 
 public class CollisionDetector{
     static public void startMovement(MoovableObject object, GridPoint2 destinationCoordinates, Field field, float updatedTankRotation) {

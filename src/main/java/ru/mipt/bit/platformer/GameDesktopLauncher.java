@@ -10,6 +10,11 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import ru.mipt.bit.platformer.player.Player;
+import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.level.FieldRenderer;
+import ru.mipt.bit.platformer.level.TextLevelGenerator;
+import ru.mipt.bit.platformer.object.Object;
 
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 import static ru.mipt.bit.platformer.util.GdxGameUtils.*;

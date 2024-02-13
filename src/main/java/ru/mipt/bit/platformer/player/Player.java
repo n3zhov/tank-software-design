@@ -1,6 +1,8 @@
-package ru.mipt.bit.platformer;
+package ru.mipt.bit.platformer.player;
 
 import com.badlogic.gdx.Gdx;
+import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.object.Direction;
 
 import static com.badlogic.gdx.Input.Keys.*;
 import static com.badlogic.gdx.Input.Keys.D;

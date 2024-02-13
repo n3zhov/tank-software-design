@@ -3,6 +3,11 @@ package ru.mipt.bit.platformer;
 import com.badlogic.gdx.math.GridPoint2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.object.Direction;
+import ru.mipt.bit.platformer.object.MoovableTile;
+import ru.mipt.bit.platformer.object.Object;
 
 import static org.junit.jupiter.api.Assertions.*;
 

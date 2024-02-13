@@ -1,12 +1,12 @@
-package ru.mipt.bit.platformer;
+package ru.mipt.bit.platformer.player;
 
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
+import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.object.*;
 
 import static com.badlogic.gdx.math.MathUtils.isEqual;
-import static ru.mipt.bit.platformer.util.GdxGameUtils.continueProgress;
 
-public class Tank extends MoovableObject implements MoovableObjectInterface{
+public class Tank extends MoovableObject implements MoovableObjectInterface {
     public Tank(Field field, MoovableTile moovableTile) {
         super(field, moovableTile, true);
     }
