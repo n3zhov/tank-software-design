@@ -10,16 +10,13 @@ import com.badlogic.gdx.maps.MapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.GridPoint2;
+import ru.mipt.bit.platformer.AI.AIAdapter;
 import ru.mipt.bit.platformer.level.TankGenerator;
-import ru.mipt.bit.platformer.object.EnemyTank;
-import ru.mipt.bit.platformer.object.MoovableObject;
-import ru.mipt.bit.platformer.object.MoovableTile;
-import ru.mipt.bit.platformer.player.Player;
+import ru.mipt.bit.platformer.player.LocalPlayer;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.level.FieldRenderer;
 import ru.mipt.bit.platformer.level.TextLevelGenerator;
-import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.object.LocalObject;
 
 import static com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT;
 import static ru.mipt.bit.platformer.util.GdxGameUtils.*;
@@ -30,17 +27,19 @@ public class GameDesktopLauncher implements ApplicationListener {
     private Field field;
     private FieldRenderer fieldRenderer;
 
-    private Player player;
+    private LocalPlayer localPlayer;
 
     private TiledMap level;
     private MapRenderer levelRenderer;
 
     private TankGenerator tankGenerator;
 
+    private AIAdapter ai;
+
     @Override
     public void create() {
         batch = new SpriteBatch();
-        field = new Field(new Object[10][8]);
+        field = new Field(new LocalObject[10][8]);
         fieldRenderer = new FieldRenderer(field);
 
         // load level tiles
@@ -56,7 +55,7 @@ public class GameDesktopLauncher implements ApplicationListener {
         tankGenerator = new TankGenerator(groundLayer, field, 2);
         tankGenerator.generate();
 
-        player = field.getPlayer();
+        localPlayer = field.getPlayer();
     }
 
     @Override
@@ -68,6 +67,10 @@ public class GameDesktopLauncher implements ApplicationListener {
         // get time passed since the last render
         float deltaTime = Gdx.graphics.getDeltaTime();
 
+        ai = new AIAdapter(field);
+        ai.stepAI();
+
+        //Enemy tanks now not moving randomly
         field.iterateTanks();
 
         field.render(deltaTime);

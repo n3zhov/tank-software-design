@@ -2,10 +2,11 @@ package ru.mipt.bit.platformer.level;
 
 import com.badlogic.gdx.math.GridPoint2;
 import ru.mipt.bit.platformer.object.MoovableTile;
-import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.object.LocalObject;
 import ru.mipt.bit.platformer.object.EnemyTank;
-import ru.mipt.bit.platformer.player.Player;
+import ru.mipt.bit.platformer.player.LocalPlayer;
 import ru.mipt.bit.platformer.player.Tank;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,21 +20,21 @@ public class Field {
 
     private List<Tank> tanks;
 
-    private Player player;
+    private LocalPlayer localPlayer;
 
     private Tank playerTank;
-    public Object[][] getData() {
+    public LocalObject[][] getData() {
         return data;
     }
 
-    protected Object[][] data;
+    protected LocalObject[][] data;
 
-    public Field(Object[][] data) {
+    public Field(LocalObject[][] data) {
         this.data = data;
         this.tanks = new ArrayList<Tank>();
         for(int i = 0; i < data.length; ++i) {
             for (int j = 0; j < data[i].length; ++j) {
-                data[i][j] = new Object();
+                data[i][j] = new LocalObject();
             }
         }
     }
@@ -48,14 +49,22 @@ public class Field {
         }
     }
 
-    public void setObject(GridPoint2 coordinates, Object object) {
+    public void setObject(GridPoint2 coordinates, LocalObject localObject) {
         if (coordinates.x < data.length && coordinates.y < data[coordinates.x].length) {
-            this.data[coordinates.x][coordinates.y] = object;
+            this.data[coordinates.x][coordinates.y] = localObject;
+        }
+    }
+
+    public LocalObject getObject(GridPoint2 coordinates) {
+        if (coordinates.x < data.length && coordinates.y < data[coordinates.x].length) {
+            return this.data[coordinates.x][coordinates.y];
+        } else {
+            return new LocalObject();
         }
     }
     public void deleteObstacle(GridPoint2 coordinates) {
         if (coordinates.x < data.length && coordinates.y < data[coordinates.x].length) {
-            this.data[coordinates.x][coordinates.y] = new Object();
+            this.data[coordinates.x][coordinates.y] = new LocalObject();
         }
     }
     public boolean checkIfObstacle(GridPoint2 coordinates) {
@@ -71,7 +80,7 @@ public class Field {
             if (tank instanceof EnemyTank) {
                 ((EnemyTank) tank).iterate(this);
             } else {
-                player.scanForKeys(this);
+                localPlayer.scanForKeys(this);
             }
         }
     }
@@ -84,12 +93,12 @@ public class Field {
         this.playerTankTile = playerTankTile;
     }
 
-    public Player getPlayer() {
-        return player;
+    public LocalPlayer getPlayer() {
+        return localPlayer;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayer(LocalPlayer localPlayer) {
+        this.localPlayer = localPlayer;
     }
 
     public Tank getPlayerTank() {

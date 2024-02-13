@@ -2,23 +2,27 @@ package ru.mipt.bit.platformer.player;
 
 import com.badlogic.gdx.Gdx;
 import ru.mipt.bit.platformer.level.Field;
-import ru.mipt.bit.platformer.object.Action;
+import ru.mipt.bit.platformer.object.TypeOfAction;
 import ru.mipt.bit.platformer.object.Command;
 import ru.mipt.bit.platformer.object.Direction;
 
 import static com.badlogic.gdx.Input.Keys.*;
 import static com.badlogic.gdx.Input.Keys.D;
 
-public class Player {
+public class LocalPlayer {
+    public Tank getPlayerTank() {
+        return playerTank;
+    }
+
     private Tank playerTank;
 
-    public Player(Tank playerTank) {
+    public LocalPlayer(Tank playerTank) {
         this.playerTank = playerTank;
     }
 
     public void scanForKeys(Field field) {
         Command command = new Command();
-        command.setAction(Action.MoveAction);
+        command.setAction(TypeOfAction.MoveAction);
         if (Gdx.input.isKeyPressed(UP) || Gdx.input.isKeyPressed(W)) {
             command.setDirection(Direction.UP);
         }

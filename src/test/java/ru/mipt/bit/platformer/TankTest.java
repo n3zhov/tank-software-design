@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.mipt.bit.platformer.object.*;
-import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.object.LocalObject;
 import ru.mipt.bit.platformer.player.Tank;
 import ru.mipt.bit.platformer.level.Field;
 
@@ -16,11 +16,11 @@ class TankTest {
     private Field field;
     @BeforeEach
     void setUp() {
-        field = new Field(new Object[10][8]);
+        field = new Field(new LocalObject[10][8]);
         for (int i = 0; i < 3; ++i) {
-            Object object = new Object();
-            object.setObstacle(true);
-            field.setObject(new GridPoint2(1 + i, 2 + i), object);
+            LocalObject localObject = new LocalObject();
+            localObject.setObstacle(true);
+            field.setObject(new GridPoint2(1 + i, 2 + i), localObject);
         }
 
 
@@ -31,7 +31,7 @@ class TankTest {
     @Test
     void moveTo() {
         Command command = new Command();
-        command.setAction(Action.MoveAction);
+        command.setAction(TypeOfAction.MoveAction);
 
         command.setDirection(Direction.UP);
         playerTank.execute(command, field);

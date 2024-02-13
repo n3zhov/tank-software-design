@@ -5,7 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.mipt.bit.platformer.level.Field;
-import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.object.LocalObject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,15 +14,15 @@ class FieldTest {
 
     @Test
     void setTile() {
-        Object objectNotObstacle = new Object();
+        LocalObject localObjectNotObstacle = new LocalObject();
         GridPoint2 notObstacleCoordinates = new GridPoint2(5, 5);
-        field.setObject(notObstacleCoordinates, objectNotObstacle);
+        field.setObject(notObstacleCoordinates, localObjectNotObstacle);
         assertFalse(field.checkIfObstacle(notObstacleCoordinates));
 
-        Object objectObstacle = new Object();
-        objectObstacle.setObstacle(true);
+        LocalObject localObjectObstacle = new LocalObject();
+        localObjectObstacle.setObstacle(true);
         GridPoint2 obstacleCoordinates = new GridPoint2(6, 6);
-        field.setObject(obstacleCoordinates, objectObstacle);
+        field.setObject(obstacleCoordinates, localObjectObstacle);
         assertTrue(field.checkIfObstacle(obstacleCoordinates));
     }
 
@@ -48,11 +48,11 @@ class FieldTest {
 
     @BeforeEach
     void setUp() {
-        field = new Field(new Object[10][8]);
+        field = new Field(new LocalObject[10][8]);
         for (int i = 0; i < 3; ++i) {
-            Object object = new Object();
-            object.setObstacle(true);
-            field.setObject(new GridPoint2(1 + i, 2 + i), object);
+            LocalObject localObject = new LocalObject();
+            localObject.setObstacle(true);
+            field.setObject(new GridPoint2(1 + i, 2 + i), localObject);
         }
     }
 

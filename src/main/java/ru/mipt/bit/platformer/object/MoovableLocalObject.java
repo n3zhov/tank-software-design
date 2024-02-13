@@ -4,10 +4,10 @@ import ru.mipt.bit.platformer.level.Field;
 
 import static com.badlogic.gdx.math.MathUtils.isEqual;
 
-public class MoovableObject extends Object{
+public class MoovableLocalObject extends LocalObject {
     protected MoovableTile moovableTile;
 
-    public MoovableObject(Field field, MoovableTile moovableTile, boolean obstacle) {
+    public MoovableLocalObject(Field field, MoovableTile moovableTile, boolean obstacle) {
         super(field, moovableTile, obstacle);
         this.moovableTile = moovableTile;
     }

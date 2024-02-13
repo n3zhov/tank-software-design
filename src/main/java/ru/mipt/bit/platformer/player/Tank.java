@@ -6,7 +6,7 @@ import ru.mipt.bit.platformer.object.*;
 
 import static com.badlogic.gdx.math.MathUtils.isEqual;
 
-public class Tank extends MoovableObject implements MoovableObjectInterface {
+public class Tank extends MoovableLocalObject implements MoovableObjectInterface {
     public Tank(Field field, MoovableTile moovableTile) {
         super(field, moovableTile, true);
         field.getTanks().add(this);

@@ -7,7 +7,7 @@ import ru.mipt.bit.platformer.player.Tank;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.object.CollisionDetector;
 import ru.mipt.bit.platformer.object.MoovableTile;
-import ru.mipt.bit.platformer.object.Object;
+import ru.mipt.bit.platformer.object.LocalObject;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,11 +29,11 @@ class CollisionDetectorTest {
 
     @BeforeEach
     void setUp() {
-        field = new Field(new Object[10][8]);
+        field = new Field(new LocalObject[10][8]);
         for (int i = 0; i < 3; ++i) {
-            Object object = new Object();
-            object.setObstacle(true);
-            field.setObject(new GridPoint2(1 + i, 2 + i), object);
+            LocalObject localObject = new LocalObject();
+            localObject.setObstacle(true);
+            field.setObject(new GridPoint2(1 + i, 2 + i), localObject);
         }
 
 

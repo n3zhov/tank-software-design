@@ -3,8 +3,8 @@ package ru.mipt.bit.platformer.level;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import ru.mipt.bit.platformer.object.MoovableTile;
-import ru.mipt.bit.platformer.object.Object;
-import ru.mipt.bit.platformer.player.Player;
+import ru.mipt.bit.platformer.object.LocalObject;
+import ru.mipt.bit.platformer.player.LocalPlayer;
 import ru.mipt.bit.platformer.player.Tank;
 import ru.mipt.bit.platformer.object.Tile;
 
@@ -55,14 +55,14 @@ public class TextLevelGenerator implements LevelGenerator{
 
         field.setPlayerTank(new Tank(field, field.getPlayerTankTile()));
 
-        field.setPlayer(new Player(field.getPlayerTank()));
+        field.setPlayer(new LocalPlayer(field.getPlayerTank()));
     }
 
     private void createTree(GridPoint2 coordinates) {
         Tile tile;
-        Object object;
+        LocalObject localObject;
 
         tile = new Tile(groundLayer, treePath, coordinates);
-        object = new Object(field, tile, true);
+        localObject = new LocalObject(field, tile, true);
     }
 }
