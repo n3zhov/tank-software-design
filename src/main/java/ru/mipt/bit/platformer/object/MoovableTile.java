@@ -10,7 +10,7 @@ import static com.badlogic.gdx.math.MathUtils.isEqual;
 import static ru.mipt.bit.platformer.util.GdxGameUtils.continueProgress;
 
 public class MoovableTile extends Tile {
-    protected static final float MOVEMENT_SPEED = 0.4f;
+    protected float movementSpeed = 0.4f;
     protected TileMovement tileMovement;
     protected GridPoint2 tileDestinationCoordinates;
     protected float objectMovementProgress = 1f;
@@ -29,7 +29,7 @@ public class MoovableTile extends Tile {
     public void render(float deltaTime, Field field) {
         tileMovement.moveRectangleBetweenTileCenters(this.tileRectangle, this.tileCoordinates,
                 this.tileDestinationCoordinates, this.objectMovementProgress);
-        this.objectMovementProgress = continueProgress(this.objectMovementProgress, deltaTime, MOVEMENT_SPEED);
+        this.objectMovementProgress = continueProgress(this.objectMovementProgress, deltaTime, movementSpeed);
     }
 
     public GridPoint2 getTileDestinationCoordinates() {
@@ -54,5 +54,13 @@ public class MoovableTile extends Tile {
 
     public void setObjectMovementProgress(float objectMovementProgress) {
         this.objectMovementProgress = objectMovementProgress;
+    }
+
+    public float getMovementSpeed() {
+        return movementSpeed;
+    }
+
+    public void setMovementSpeed(float movementSpeed) {
+        this.movementSpeed = movementSpeed;
     }
 }
