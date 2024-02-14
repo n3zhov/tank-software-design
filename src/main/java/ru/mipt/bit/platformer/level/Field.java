@@ -8,7 +8,7 @@ import ru.mipt.bit.platformer.object.LocalObject;
 import ru.mipt.bit.platformer.object.EnemyTank;
 import ru.mipt.bit.platformer.observer.Publisher;
 import ru.mipt.bit.platformer.player.LocalPlayer;
-import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.object.Tank;
 
 
 import java.util.ArrayList;
@@ -16,6 +16,16 @@ import java.util.List;
 
 public class Field {
     private MoovableTile playerTankTile;
+
+    public boolean isEnableHealthBar() {
+        return enableHealthBar;
+    }
+
+    private boolean enableHealthBar;
+
+    public void toggleHealthBar() {
+        this.enableHealthBar = !this.enableHealthBar;
+    }
 
     public List<Tank> getTanks() {
         return tanks;

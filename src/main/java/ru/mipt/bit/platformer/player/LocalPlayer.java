@@ -3,11 +3,10 @@ package ru.mipt.bit.platformer.player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.object.Tank;
 import ru.mipt.bit.platformer.object.TypeOfAction;
 import ru.mipt.bit.platformer.object.Command;
 import ru.mipt.bit.platformer.object.Direction;
-
-import javax.swing.*;
 
 import static com.badlogic.gdx.Input.Keys.*;
 import static com.badlogic.gdx.Input.Keys.D;
@@ -40,9 +39,13 @@ public class LocalPlayer {
         }
         if (Gdx.input.isKeyPressed(SPACE)) {
             command.setAction(TypeOfAction.ShootAction);
+        } if (Gdx.input.isKeyPressed(L)) {
+            command.setAction(TypeOfAction.ToggleHealthBar);
         }
-          if (command.getDirection() != null || command.getAction() == TypeOfAction.ShootAction) {
+        if (command.getDirection() != null || command.getAction() == TypeOfAction.ShootAction) {
             playerTank.execute(command, field, groundLayer);
+        } else if (command.getAction() == TypeOfAction.ToggleHealthBar){
+            field.toggleHealthBar();
         }
     }
 

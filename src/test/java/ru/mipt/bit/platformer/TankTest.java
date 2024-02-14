@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import ru.mipt.bit.platformer.object.*;
 import ru.mipt.bit.platformer.object.LocalObject;
 import ru.mipt.bit.platformer.observer.Publisher;
-import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.object.Tank;
 import ru.mipt.bit.platformer.level.Field;
 
 import static org.junit.jupiter.api.Assertions.*;

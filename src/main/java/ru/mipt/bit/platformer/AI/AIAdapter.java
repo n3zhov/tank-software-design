@@ -2,8 +2,6 @@ package ru.mipt.bit.platformer.AI;
 
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
-import org.awesome.ai.AI;
-import org.awesome.ai.Action;
 import org.awesome.ai.Recommendation;
 import org.awesome.ai.state.GameState;
 import org.awesome.ai.state.immovable.Obstacle;
@@ -14,9 +12,8 @@ import org.awesome.ai.strategy.NotRecommendingAI;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.object.EnemyTank;
 import ru.mipt.bit.platformer.object.LocalObject;
-import ru.mipt.bit.platformer.object.Tile;
 import ru.mipt.bit.platformer.player.LocalPlayer;
-import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.object.Tank;
 
 import java.util.ArrayList;
 import java.util.List;

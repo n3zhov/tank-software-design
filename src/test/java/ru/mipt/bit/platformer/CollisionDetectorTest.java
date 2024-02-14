@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import ru.mipt.bit.platformer.observer.Publisher;
-import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.object.Tank;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.object.CollisionDetector;
 import ru.mipt.bit.platformer.object.MoovableTile;

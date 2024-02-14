@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import org.awesome.ai.Recommendation;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.object.Command;
-import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.object.Tank;
 
 public class AdaptedRecommendation {
     private Object object;

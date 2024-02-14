@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.GridPoint2;
 import ru.mipt.bit.platformer.object.MoovableTile;
 import ru.mipt.bit.platformer.object.LocalObject;
 import ru.mipt.bit.platformer.player.LocalPlayer;
-import ru.mipt.bit.platformer.player.Tank;
+import ru.mipt.bit.platformer.object.Tank;
 import ru.mipt.bit.platformer.object.Tile;
 
 import java.io.BufferedReader;

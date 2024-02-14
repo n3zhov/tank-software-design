@@ -1,16 +1,20 @@
-package ru.mipt.bit.platformer.player;
+package ru.mipt.bit.platformer.object;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import ru.mipt.bit.platformer.level.Field;
-import ru.mipt.bit.platformer.object.*;
 import ru.mipt.bit.platformer.observer.Publisher;
 import ru.mipt.bit.platformer.observer.Subscriber;
 
 import static com.badlogic.gdx.math.MathUtils.isEqual;
 import static ru.mipt.bit.platformer.util.GdxGameUtils.continueProgress;
 
-public class Tank extends MoovableLocalObject implements MoovableObjectInterface, Subscriber {
+public class Tank extends MoovableLocalObject implements MoovableObjectInterface, Subscriber, TankInterface {
+    public int getHealth() {
+        return health;
+    }
+
     private int health = 10;
 
     private float reloadProgress = 1f;
@@ -48,10 +52,12 @@ public class Tank extends MoovableLocalObject implements MoovableObjectInterface
             case ShootAction:
                 this.shoot(field, groundLayer);
                 break;
+            default:
+                break;
         }
     }
 
-    private void shoot(Field field, TiledMapTileLayer groundLayer) {
+    public void shoot(Field field, TiledMapTileLayer groundLayer) {
         if (reloadProgress == 1f && this.moovableTile.getObjectMovementProgress() == 1f) {
             GridPoint2 coordinates = new GridPoint2(this.moovableTile.getTileCoordinates());
             Direction direction;
@@ -108,6 +114,10 @@ public class Tank extends MoovableLocalObject implements MoovableObjectInterface
             }
             CollisionDetector.startMovement(this, destination, field, updatedTankRotation);
         }
+    }
+
+    public void drawInBatch(Batch batch){
+        this.getTile().drawInBatch(batch);
     }
 
     @Override
