@@ -1,6 +1,8 @@
 package ru.mipt.bit.platformer.object;
 
 import ru.mipt.bit.platformer.level.Field;
+import ru.mipt.bit.platformer.observer.Publisher;
+import ru.mipt.bit.platformer.observer.Subscriber;
 
 import static com.badlogic.gdx.math.MathUtils.isEqual;
 

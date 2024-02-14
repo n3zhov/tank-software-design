@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.mipt.bit.platformer.object.*;
 import ru.mipt.bit.platformer.object.LocalObject;
+import ru.mipt.bit.platformer.observer.Publisher;
 import ru.mipt.bit.platformer.player.Tank;
 import ru.mipt.bit.platformer.level.Field;
 
@@ -16,7 +17,7 @@ class TankTest {
     private Field field;
     @BeforeEach
     void setUp() {
-        field = new Field(new LocalObject[10][8]);
+        field = new Field(new LocalObject[10][8], new Publisher[10][8]);
         for (int i = 0; i < 3; ++i) {
             LocalObject localObject = new LocalObject();
             localObject.setObstacle(true);
@@ -34,12 +35,12 @@ class TankTest {
         command.setAction(TypeOfAction.MoveAction);
 
         command.setDirection(Direction.UP);
-        playerTank.execute(command, field);
+        playerTank.execute(command, field, null);
         assertEquals(playerTank.getMoovableTile().getTileDestinationCoordinates(), new GridPoint2(1, 1));
         assertEquals(playerTank.getMoovableTile().getTileRotation(), 0f);
 
         command.setDirection(Direction.LEFT);
-        playerTank.execute(command, field);
+        playerTank.execute(command, field, null);
         assertEquals(playerTank.getMoovableTile().getTileDestinationCoordinates(), new GridPoint2(0, 1));
         assertEquals(playerTank.getMoovableTile().getTileRotation(), -180f);
     }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.object.LocalObject;
 import ru.mipt.bit.platformer.object.Tile;
+import ru.mipt.bit.platformer.observer.Publisher;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +21,7 @@ class LocalObjectTest {
     }
     @BeforeEach
     void setUp() {
-        field = new Field(new LocalObject[10][8]);
+        field = new Field(new LocalObject[10][8], new Publisher[10][8]);
         for (int i = 0; i < 3; ++i) {
             LocalObject localObject = new LocalObject();
             localObject.setObstacle(true);

@@ -1,5 +1,6 @@
 package ru.mipt.bit.platformer.AI;
 
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.GridPoint2;
 import org.awesome.ai.AI;
 import org.awesome.ai.Action;
@@ -13,6 +14,7 @@ import org.awesome.ai.strategy.NotRecommendingAI;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.object.EnemyTank;
 import ru.mipt.bit.platformer.object.LocalObject;
+import ru.mipt.bit.platformer.object.Tile;
 import ru.mipt.bit.platformer.player.LocalPlayer;
 import ru.mipt.bit.platformer.player.Tank;
 
@@ -21,12 +23,14 @@ import java.util.List;
 
 public class AIAdapter {
     private Field field;
+    private TiledMapTileLayer groundLayer;
     private Player player;
     private GameState gameState;
     private NotRecommendingAI ai;
 
-    public AIAdapter(Field field) {
+    public AIAdapter(Field field, TiledMapTileLayer groundLayer) {
         this.field = field;
+        this.groundLayer = groundLayer;
         GameState.GameStateBuilder gameStateBuilder = gameState.builder();
 
         buildPlayer();
@@ -123,7 +127,7 @@ public class AIAdapter {
     public void stepAI() {
         ArrayList<AdaptedRecommendation> adaptedRecommendations = getRecommendations();
         for (AdaptedRecommendation recommendation : adaptedRecommendations) {
-            recommendation.act(field);
+            recommendation.act(field, groundLayer);
         }
     }
     private ArrayList<AdaptedRecommendation> getRecommendations() {

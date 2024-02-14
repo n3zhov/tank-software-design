@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import ru.mipt.bit.platformer.AI.AIAdapter;
 import ru.mipt.bit.platformer.level.TankGenerator;
+import ru.mipt.bit.platformer.observer.Publisher;
 import ru.mipt.bit.platformer.player.LocalPlayer;
 import ru.mipt.bit.platformer.level.Field;
 import ru.mipt.bit.platformer.level.FieldRenderer;
@@ -33,19 +34,20 @@ public class GameDesktopLauncher implements ApplicationListener {
     private MapRenderer levelRenderer;
 
     private TankGenerator tankGenerator;
+    private TiledMapTileLayer groundLayer;
 
     private AIAdapter ai;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
-        field = new Field(new LocalObject[10][8]);
+        field = new Field(new LocalObject[10][8], new Publisher[10][8]);
         fieldRenderer = new FieldRenderer(field);
 
         // load level tiles
         level = new TmxMapLoader().load("level.tmx");
         levelRenderer = createSingleLayerMapRenderer(level, batch);
-        TiledMapTileLayer groundLayer = getSingleLayer(level);
+        groundLayer = getSingleLayer(level);
 
         //RandomLevelGenerator randomLevelGenerator = new RandomLevelGenerator(groundLayer, field);
         //file should have field size(10, 8)
@@ -67,11 +69,11 @@ public class GameDesktopLauncher implements ApplicationListener {
         // get time passed since the last render
         float deltaTime = Gdx.graphics.getDeltaTime();
 
-        ai = new AIAdapter(field);
+        ai = new AIAdapter(field, groundLayer);
         ai.stepAI();
 
         //Enemy tanks now not moving randomly
-        field.iterateTanks();
+        field.iterate(groundLayer);
 
         field.render(deltaTime);
 
