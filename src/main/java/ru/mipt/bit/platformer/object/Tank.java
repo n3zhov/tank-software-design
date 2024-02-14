@@ -49,16 +49,12 @@ public class Tank extends MoovableLocalObject implements MoovableObjectInterface
 
     @Override
     public void takeHit(Field field) {
-        --health;
-        if (health <= 7) {
+        health--;
+        if (health > 1 && health <= 7) {
             state = new MeduimDamaged(this);
-            return;
-        }
-        if (health < 2) {
+        } else if (health == 1) {
             state = new HeavyDamaged(this);
-            return;
-        }
-        if (health == 0) {
+        } else if (health == 0) {
             field.setObject(this.moovableTile.getTileCoordinates(), new LocalObject());
             field.setObject(this.moovableTile.getTileDestinationCoordinates(), new LocalObject());
             this.getTile().dispose();
